@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title%}
+    <div class="masthead-heading text-uppercase">О нас</div>  
+{% endblock %}
+
+{% block content %}
+<!-- {% load static %} -->
+<section class="py-5">
+    <div class="container py-5">
+      <div class="row gy-4">
+        <div class="col-lg-5">
+          <div class="pt-1 bg-primary"><img class="img-fluid" src="{% static 'assets/img/about-img.jpg' %}" alt=""></div>
+        </div>
+        <div class="col-lg-6">
+          <p class="h6 mb-1 text-uppercase text-primary mb-3">О нас</p>
+          <h2 class="mb-4">Мы работаем во благо всех людей, кто ищет новые возможности в новой работе</h2>
+          <p class="text-sm text-muted"> Наша команда Curriculum Vitae начала работу в 2020 году. Мы начинали с заказов через группы в социальных сетях и отправляли 
+              готовый продукт на почты работниками, которые выполняли оформление резюме вручную. В течении двух лет мы набрали весомую клиентскую базу и вскоре мы 
+              создали сайт который занимается оформлением резюме автоматизировано. В нашей команде трудятся ответственные работники, которые всегда готовы помочь 
+              нашим клиентам 24/7. В случае каких-либо вопросов свясжитесь с нами, отправив пиьсмо, и мы ответим на ваши вопросы в течении суток.</p>
+          <ul class="list-check list-unstyled row px-3 gy-2 mb-4">
+            <li class="text-sm text-muted col-lg-6">Техническая поддержка 24/7</li>
+            <li class="text-sm text-muted col-lg-6">Автоматизированное оформление резюме</li>
+            <li class="text-sm text-muted col-lg-6">Добавление новых шаблонов резюме</li>
+            <li class="text-sm text-muted col-lg-6">Удобные альтернативы для хранения резюме</li>
+            <li class="text-sm text-muted col-lg-6">Надежность хранения личных данных каждого клиента</li>
+            <li class="text-sm text-muted col-lg-6">Изучаем отзывы наших клиентов</li>
+          </ul>
+          <ul class="list-inline py-4 border-top border-bottom d-flex align-items-center">
+            <li class="list-inline-item pe-4 me-0"><img src="{% static 'assets/img/person-1.jpg' %}" alt="" width="80"></li>
+            <li class="list-inline-item px-4 me-0 border-start">
+              <h5 class="mb-0">Абдулло Хожахматов</h5>
+              <p class="small fw-normal text-muted mb-0">Основатель Curriculum Vitae </p>
+            </li>
+            <li class="list-inline-item ps-4 border-start">
+              <h5 class="mb-0">+996 555 123 321</h5>
+              <p class="small fw-normal text-muted mb-0">Звоните по любым вопросам</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

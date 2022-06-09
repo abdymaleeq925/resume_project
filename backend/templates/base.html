@@ -27,30 +27,40 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home2' %}">Услуги</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Главная страница</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Услуги</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Шаблоны</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">О нас</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Контакты</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Войти</a></li>
+                        {% if not request.user.is.authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'signin' %}">Войти</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Регситрация</a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Выйти</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </nav>
-    <header class="masthead">
-        <div class="container">
-       
-        </div>
-    </header>
+        <header class="masthead">
+            <div class="container">
+                {% block title %}
+
+                {% endblock %}
+            </div>
+        </header>
+    
 
     {% block content %}
-    <h1>DONE!!!</h1>
+
     {% endblock %}
+    
     <!-- Contact-->
     <section class="page-section" id="contact">
         <div class="container">
             <div class="text-center">
-                <h2 class="section-heading text-uppercase">Contact Us</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                <h2 class="section-heading text-uppercase">Свяжитесь с нами</h2>
+                <h3 class="section-subheading text-muted">Наши люди ответят вам в течении суток</h3>
             </div>
             <!-- * * * * * * * * * * * * * * *-->
             <!-- * * SB Forms Contact Form * *-->
@@ -64,26 +74,26 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <!-- Name input-->
-                            <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
-                            <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            <input class="form-control" id="name" type="text" placeholder="Имя *" data-sb-validations="required" />
+                            <div class="invalid-feedback" data-sb-feedback="name:required">Необходимо имя.</div>
                         </div>
                         <div class="form-group">
                             <!-- Email address input-->
-                            <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
-                            <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                            <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                            <input class="form-control" id="email" type="email" placeholder="Электронная почта *" data-sb-validations="required,email" />
+                            <div class="invalid-feedback" data-sb-feedback="email:required">Необходима электронная почта.</div>
+                            <div class="invalid-feedback" data-sb-feedback="email:email">Электронная почта не действительна.</div>
                         </div>
                         <div class="form-group mb-md-0">
                             <!-- Phone number input-->
-                            <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
-                            <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                            <input class="form-control" id="phone" type="tel" placeholder="Номер телефона *" data-sb-validations="required" />
+                            <div class="invalid-feedback" data-sb-feedback="phone:required">Необходим номер телефона.</div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group form-group-textarea mb-md-0">
                             <!-- Message input-->
-                            <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
-                            <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                            <textarea class="form-control" id="message" placeholder="Сообщение *" data-sb-validations="required"></textarea>
+                            <div class="invalid-feedback" data-sb-feedback="message:required">Необходимо сообщение</div>
                         </div>
                     </div>
                 </div>
@@ -93,35 +103,23 @@
                 <!-- has successfully submitted-->
                 <div class="d-none" id="submitSuccessMessage">
                     <div class="text-center text-white mb-3">
-                        <div class="fw-bolder">Form submission successful!</div>
-                        To activate this form, sign up at
-                        <br />
-                        <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                        <div class="fw-bolder">Отправлено!</div>
                     </div>
                 </div>
                 <!-- Submit error message-->
                 <!---->
                 <!-- This is what your users will see when there is-->
                 <!-- an error submitting the form-->
-                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Ошибка в отправке сообщения!</div></div>
                 <!-- Submit Button-->
-                <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button></div>
+                <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Отправить</button></div>
             </form>
         </div>
     </section>
     <footer class="footer py-4">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-4 text-lg-start">Copyright &copy; Your Website 2022</div>
-                <div class="col-lg-4 my-3 my-lg-0">
-                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <div class="col-lg-4 text-lg-end">
-                    <a class="link-dark text-decoration-none me-3" href="#!">Privacy Policy</a>
-                    <a class="link-dark text-decoration-none" href="#!">Terms of Use</a>
-                </div>
+                <div class="col-lg-4 text-lg-start">Copyright &copy; Curriculum Vitae</div>
             </div>
         </div>    
     </footer>

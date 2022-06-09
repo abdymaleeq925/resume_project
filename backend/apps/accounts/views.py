@@ -37,4 +37,4 @@ class RegisterDoneView(TemplateView):
 def user_logout(request):
     if request.user.is_authenticated:
         logout(request)
-    return redirect('index')
+    return redirect('base')
