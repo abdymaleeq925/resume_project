@@ -18,7 +18,7 @@ class LoginView(FormView):
         if user is not None:
             if user.is_active:
                 login(self.request, user)
-                return HttpResponse("Вы успешно вошли")
+                return redirect("home")
             else:
                 return HttpResponse("Ваш аккаунт неактивен")
         return HttpResponse("Такого пользователя не существует")
@@ -37,4 +37,4 @@ class RegisterDoneView(TemplateView):
 def user_logout(request):
     if request.user.is_authenticated:
         logout(request)
-    return redirect('base')
+    return redirect('home')

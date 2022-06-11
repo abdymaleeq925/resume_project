@@ -15,8 +15,7 @@ class LoginForm(forms.Form):
             attrs={
                 "class":"form-control",
                 "type":"password",
-                "autocomplete":"off",
-                "placeholder":"Пароль"
+                "autocomplete":"off"
                 }
             )
     )    
