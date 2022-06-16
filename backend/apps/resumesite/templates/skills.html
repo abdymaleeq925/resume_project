@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Заполните первую страницу</h1>
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+    <form method="post">
+        {{ form }}
+    </form>
+    </div>
+</div>
+<a class="btn btn-primary btn-lg text-uppercase" href="#">Сохранить</a>
+{% endblock %}
