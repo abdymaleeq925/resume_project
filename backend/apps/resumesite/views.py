@@ -53,4 +53,4 @@ class XPShow(CreateView):
     
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(EduShow, self).form_valid(form)
+        return super(XPShow, self).form_valid(form)

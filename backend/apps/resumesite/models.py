@@ -29,7 +29,7 @@ class CV(models.Model):
     address = models.CharField("Адрес", max_length=200)
     location = models.CharField("Страна", max_length=50)
     prof_summary = models.TextField("О себе", max_length=400)
-    resume_template = models.ForeignKey(ResumeTemplate, on_delete=models.CASCADE)
+    # resume_template = models.ForeignKey(ResumeTemplate, on_delete=models.CASCADE)
 
 
 class Education(models.Model):
