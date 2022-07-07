@@ -1,18 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    <div class="masthead-heading text-uppercase">Создание резюме</div>  
-{% endblock %}
-
-
-
 {% block content %}
-
-<!-- <a class="btn btn-primary btn-xl text-uppercase" href="{% url 'profile' %}">Профиль</a>
-<a class="btn btn-primary btn-xl text-uppercase" href="{% url 'education' education.resume_id %}">Образование</a>
-<a class="btn btn-primary btn-xl text-uppercase" href="{% url 'experience' %}">Опыт работы</a>
-<a class="btn btn-primary btn-xl text-uppercase" href="{% url 'skills' %}">Умения</a>
-<a class="btn btn-primary btn-xl text-uppercase" href="{% url 'language' %}">Языки</a> -->
 
 <!DOCTYPE html>
 <html>
@@ -195,10 +183,9 @@
       }
     </style>
   </head>
-  
   <body>
     <div class="testbox">
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" enctype="">
         {% csrf_token %}
         <div class="banner">
           <h1>Профиль</h1>
@@ -207,11 +194,10 @@
           {{ form.as_p }}
         </div>
         <div class="btn-block">
-          <button type="submit" value="Save">Далее</button>
+          <button type="submit">Обновить</button>
         </div>
       </form>
     </div>
   </body>
 </html>
-
 {% endblock %}

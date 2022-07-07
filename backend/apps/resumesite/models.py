@@ -3,7 +3,7 @@ from backend.apps.accounts.models import *
 
 
 class ResumeTemplate(models.Model):
-    name = models.CharField(max_length=300)
+    name = models.CharField(max_length=100)
     template_image = models.ImageField(upload_to='cv_samples/', null=True, blank=True)
 
     def __str__(self):
@@ -20,6 +20,7 @@ class ResumeTemplate(models.Model):
         super().save(*args, **kwargs)
 
 class CV(models.Model):
+    resume_name = models.CharField("Название резюме", max_length=100)
     user = models.ForeignKey(User,on_delete=models.CASCADE, related_name="cvs")
     first_name = models.CharField("Имя", max_length=50)
     last_name = models.CharField("Фамилия", max_length=50)
@@ -46,7 +47,7 @@ class Education(models.Model):
     resume = models.ForeignKey(CV, on_delete=models.CASCADE, related_name="education")
     school = models.CharField("Название школы", max_length=100)
     degree = models.CharField("Степень", max_length=12, choices=DEGREES)
-    fieldstudy = models.CharField("Специальность", max_length=100)
+    fieldstudy = models.CharField("Специальность", max_length=100, blank=True, null=True)
     start_date = models.DateField("Начало")
     end_date = models.DateField("Конец", null=True, blank=True)
 
@@ -61,9 +62,10 @@ class Experience(models.Model):
 
 class Skill(models.Model):
     resume = models.ForeignKey(CV, on_delete=models.CASCADE, related_name="skill")
-    name = models.CharField(max_length=100)
+    name = models.CharField("Умения", max_length=100)
 
 class Language(models.Model):
+
     name = models.CharField("Название", max_length=100)
 
 class LanguageCV(models.Model):

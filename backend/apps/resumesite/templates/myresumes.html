@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <div class="masthead-heading text-uppercase">Мои резюме</div>
+{% endblock %}
+
+{% block content%}
+
+
+<div class="container py-5">
+    <div class="row text-center text-yellow mb-5">
+        <div class="col-lg-7 mx-auto">
+            <h1 class="display-4">Мои резюме</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            
+            <!-- List group-->
+            <ul class="list-group shadow">
+                {% if resumes %}
+                    {% for resume in resumes %}
+                    <!-- list group item-->
+                    <li class="list-group-item">
+                        <!-- Custom content-->
+                        <div class="media align-items-lg-center flex-column flex-lg-row p-3">
+                            <div class="media-body order-2 order-lg-1">
+                                <a>
+                                    <h5 class="mt-0 font-weight-bold mb-2">{{ resume.resume_name }}</h5>
+                                </a>
+                                    <p class="font-italic text-muted mb-0 small"></p>
+                                <div class="d-flex align-items-center justify-content-between mt-1">
+                                    <h6 class="font-weight-bold my-2"></h6>
+                                </div>
+                            </div>
+                            <a>
+                                <img src="{{resume.photo.url}}" alt="Generic placeholder image" width="200" class="ml-lg-5 order-1 order-lg-2">
+                            </a>
+                        </div> <!-- End -->
+                        <a class="btn btn-primary btn-l text-uppercase" href="{% url 'resume_detail' resume.id %}">Редактировать</a>
+                        <a class="btn btn-primary btn-l text-uppercase" href="{% url 'export' %}">Экспортировать</a>
+                    </li> <!-- End -->
+                    {% endfor %}
+
+                {% else %}
+                    <a class="btn btn-primary btn-xl text-uppercase" href="{% url 'profile' %}">Создать резюме</a>
+                
+                {% endif %}
+            </ul> <!-- End -->
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

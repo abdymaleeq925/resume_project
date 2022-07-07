@@ -1,14 +1,330 @@
 {% extends 'base.html' %}
 
+{% block title %}
+<div class="masthead-heading text-uppercase">Создание резюме</div>
+{% endblock %}
 
 {% block content %}
-<h1>Заполните первую страницу</h1>
-<div class="input-group mb-3">
-    <div class="input-group-prepend">
-    <form method="post">
-        {{ form }}
-    </form>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+        integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+        html,
+        body {
+            min-height: 100%;
+        }
+
+        body,
+        div,
+        form,
+        input,
+        select,
+        textarea,
+        p {
+            padding: 0;
+            margin: 0;
+            outline: none;
+            font-family: Roboto, Arial, sans-serif;
+            font-size: 14px;
+            color: #666;
+            line-height: 22px;
+        }
+
+        h1 {
+            position: absolute;
+            margin: 0;
+            font-size: 38px;
+            color: #fff;
+            z-index: 2;
+        }
+
+        .testbox {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: inherit;
+            padding: 20px;
+        }
+
+        form {
+            width: 80%;
+            padding: 20px;
+            border-radius: 6px;
+            background: #fff;
+            box-shadow: 0 0 25px 0 #ffc800;
+        }
+
+        .banner {
+            position: relative;
+            height: 150px;
+            background-image: url("{% static 'assets/img/images.jpeg' %}");
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .banner::after {
+            content: "";
+            background-color: rgba(0, 0, 0, 0.3);
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        input,
+        select,
+        textarea {
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input {
+            width: calc(100% - 10px);
+            padding: 5px;
+        }
+
+        input[type="date"] {
+            padding: 4px 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 7px 0;
+            background: transparent;
+        }
+
+        textarea {
+            width: calc(100% - 12px);
+            padding: 5px;
+        }
+
+        .item:hover p,
+        .item:hover i,
+        .question:hover p,
+        .question label:hover,
+        input:hover::placeholder {
+            color: #000000;
+        }
+
+        .item input:hover,
+        .item select:hover,
+        .item textarea:hover {
+            border: 1px solid transparent;
+            box-shadow: 0 0 6px 0 #000000;
+            color: #000000;
+        }
+
+        .item {
+            position: relative;
+            margin: 10px 0;
+        }
+
+        input[type="date"]::-webkit-inner-spin-button {
+            display: none;
+        }
+
+        .item i,
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            position: absolute;
+            font-size: 20px;
+            color: #a9a9a9;
+        }
+
+        .item i {
+            right: 2%;
+            top: 30px;
+            z-index: 1;
+        }
+
+        [type="date"]::-webkit-calendar-picker-indicator {
+            right: 1%;
+            z-index: 2;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        input[type=radio],
+        input[type=checkbox] {
+            display: none;
+        }
+
+        label.radio {
+            position: relative;
+            display: inline-block;
+            margin: 5px 20px 15px 0;
+            cursor: pointer;
+        }
+
+        .question span {
+            margin-left: 30px;
+        }
+
+        label.radio:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 17px;
+            height: 17px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+        }
+
+        input[type=radio]:checked+label:before,
+        label.radio:hover:before {
+            border: 2px solid #000000;
+        }
+
+        label.radio:after {
+            content: "";
+            position: absolute;
+            top: 6px;
+            left: 5px;
+            width: 8px;
+            height: 4px;
+            border: 3px solid #ffc800;
+            border-top: none;
+            border-right: none;
+            transform: rotate(-45deg);
+            opacity: 0;
+        }
+
+        input[type=radio]:checked+label:after {
+            opacity: 1;
+        }
+
+        .btn-block {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        button {
+            width: 150px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #ffc800;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e4ce0c;
+        }
+
+        @media (min-width: 568px) {
+
+            .name-item,
+            .city-item {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .name-item input,
+            .city-item input {
+                width: calc(50% - 20px);
+            }
+
+            .city-item select {
+                width: calc(50% - 8px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="testbox">
+        <form method="post">
+            {% csrf_token %}
+            <div class="banner">
+                <h1>Опыт работы</h1>
+            </div>
+            <table class="table table-sm" id="eduTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Должность</th>
+                        <th scope="col">Название компании</th>
+                        <th scope="col">Место работы</th>
+                        <th scope="col">Начало работы</th>
+                        <th scope="col">Конец работы</th>
+                        <th scope="col">Описание </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for experience in experiences %}
+                    <tr>
+                        <td>{{ experience.job_title }}</td>
+                        <td>{{ experience.company_name }}</td>
+                        <td>{{ experience.job_location }}</td>
+                        <td>{{ experience.start_date }}</td>
+                        <td>
+                            {% if experience.end_date is not None %}
+                                {{ education.end_date }}
+                            {% else %}
+                                В работе
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="{% url 'experience_detail' experience.id %}">Редактировать</a>
+                            <input type="button" value="Удалить" onclick="DeleteRowFunction(this)" class="btn btn-warning"/>
+                        </td>
+                    </tr>
+                    {% empty %}
+                        <tr>
+                            <h2>Вы ещё не добавили опыт работы.</h2>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#educationModal"
+                data-bs-whatever="@mdo"> Добавить опыт работы </button>
+            <button class="btn btn-info btn-sm" href=""> Перейти к следующей части</button>
+        </form>
+
+
+        <div class="modal fade" id="educationModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Опыт работы</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            
+                            {{ form }}
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть </button>
+                            <button type="submit" class="btn btn-primary">Добавить</button>
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
-<a class="btn btn-primary btn-lg text-uppercase" href="#">Сохранить</a>
+    <script>
+        function DeleteRowFunction(r){
+            var i=r.parentNode.parentNode;
+            i.parentNode.removeChild(i);
+            Education.objects.filter(id=pk).delete();
+        }
+    </script>
+</body>
+</html>
+
 {% endblock %}

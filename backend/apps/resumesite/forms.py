@@ -1,12 +1,18 @@
 from django import forms
 from .models import *
-from django.forms import modelformset_factory
+
+class ResumeForm(forms.ModelForm):
+    class Meta():
+       model = ResumeTemplate
+       fields = ['name','template_image']
+
 
 class ProfileForm(forms.ModelForm):
     class Meta():
         model = CV
-        fields = ['first_name', 'last_name', 'photo', 'email', 'mobile', 'address', 'location', 'prof_summary']
+        fields = ['resume_name', 'first_name', 'last_name', 'photo', 'email', 'mobile', 'address', 'location', 'prof_summary']
         widgets = {
+            'resume_name': forms.TextInput(attrs={"class": "form-control"}),
             'first_name': forms.TextInput(attrs={"class": "form-control"}),
             'last_name': forms.TextInput(attrs={"class": "form-control"}),
             'photo': forms.FileInput(attrs={"class": "form-control"}),
@@ -18,6 +24,8 @@ class ProfileForm(forms.ModelForm):
         }
 
 class EducationForm(forms.ModelForm):
+    degree = forms.ChoiceField(widget=forms.Select(attrs={"class":"form-control"}), choices=Education.DEGREES)
+
     class Meta():
         model = Education
         fields = ['school', 'degree', 'fieldstudy', 'start_date', 'end_date']
@@ -25,11 +33,9 @@ class EducationForm(forms.ModelForm):
             'school': forms.TextInput(attrs={"class": "form-control"}),
             'degree': forms.TextInput(attrs={"class": "form-control"}),
             'fieldstudy': forms.TextInput(attrs={"class": "form-control"}),
-            'start_date': forms.DateInput(attrs={"class": "form-control"}),
-            'end_date': forms.DateInput(attrs={"class": "form-control"})
+            'start_date': forms.DateInput(attrs={"class": "form-control", "type":"date"}),
+            'end_date': forms.DateInput(attrs={"class": "form-control", "type":"date"})
         }
-
-EducationFormSet = forms.modelformset_factory(Education, fields=('school', 'degree', 'fieldstudy', 'start_date', 'end_date'), extra=1)
 
 
 class XPForm(forms.ModelForm):
@@ -40,12 +46,14 @@ class XPForm(forms.ModelForm):
             'job_title': forms.TextInput(attrs={"class": "form-control"}),
             'company_name': forms.TextInput(attrs={"class": "form-control"}),
             'job_location': forms.TextInput(attrs={"class": "form-control"}),
-            'start_date': forms.DateInput(attrs={"class": "form-control"}),
-            'end_date': forms.DateInput(attrs={"class": "form-control"}),
+            'start_date': forms.DateInput(attrs={"class": "form-control", "type":"date"}),
+            'end_date': forms.DateInput(attrs={"class": "form-control", "type":"date"}),
             'job_description': forms.Textarea(attrs={"class": "form-control"})
         }
 
 class LangForm(forms.ModelForm):
+    level = forms.ChoiceField(widget=forms.Select(attrs={"class":"form-control"}), choices=LanguageCV.LEVEL)
+
     class Meta():
         model = LanguageCV
         fields = ['language', 'level']
